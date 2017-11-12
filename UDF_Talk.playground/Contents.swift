@@ -89,7 +89,7 @@ protocol Reducer: class {
     func reduce(action: Action, state: AppState?) -> AppState
 }
 
-// NOTE: This was taken from Fox OTT - credit to Greg Niemann
+// NOTE: Credit to Greg Niemann for this class
 class AppReducer {
     var reducers: [Reducer] = []
     
@@ -205,6 +205,8 @@ class SubscribingViewController: StoreSubscriber {
 struct DataActionCreator {
     static func getData() -> AsyncActionCreator {
         return { state, completion  in
+            // Could check here if there is a value in state which
+            //  would play a factor into our Api call
             Api.shared.getData(completion: { (data, error) in
                 completion({ (_) -> Action? in
                     // Once we have our data, return an action
